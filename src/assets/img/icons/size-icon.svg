@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.886" height="16.886" viewBox="0 0 16.886 16.886">
+  <g id="Icon_feather-move" data-name="Icon feather-move" transform="translate(1 1)">
+    <path id="Path_25" data-name="Path 25" d="M5.233,13.5,3,15.733l2.233,2.233" transform="translate(-3 -8.29)" fill="none" stroke="#234836" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_26" data-name="Path 26" d="M13.5,5.233,15.733,3l2.233,2.233" transform="translate(-8.29 -3)" fill="none" stroke="#234836" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_27" data-name="Path 27" d="M17.966,28.5l-2.233,2.233L13.5,28.5" transform="translate(-8.29 -15.847)" fill="none" stroke="#234836" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_28" data-name="Path 28" d="M28.5,13.5l2.233,2.233L28.5,17.966" transform="translate(-15.847 -8.29)" fill="none" stroke="#234836" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_29" data-name="Path 29" d="M3,18H17.886" transform="translate(-3 -10.557)" fill="none" stroke="#234836" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_30" data-name="Path 30" d="M18,3V17.886" transform="translate(-10.557 -3)" fill="none" stroke="#234836" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>
