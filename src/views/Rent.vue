@@ -190,7 +190,7 @@ export default {
 </script>
 
 <style>
-	.Buy{
+	/* .Buy{
 		margin-top: 130px;
 	}
 
@@ -309,5 +309,5 @@ export default {
 		font-size: 9pt;
 		font-weight: 600;
 		color: var(--primaryColor);
-	}
+	} */
 </style>
