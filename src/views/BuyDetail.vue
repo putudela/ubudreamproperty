@@ -36,12 +36,7 @@
                         </div>
                         
                         <div class="card">
-                            <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
-                                <!-- <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                </div> -->
+                            <!-- <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item" v-for="(image, index) in listingImage" :key="index" :class="{'active': index == 0}">
                                         <img :src="imageUrl+image" class="d-block w-100">
@@ -55,7 +50,7 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
 
                         <hr>
@@ -70,7 +65,7 @@
                                 <h5 v-else>{{listing.listing_status}} / Hak Sewa</h5>
                                 <p>Status</p>
                             </div>
-                            <div class="list_spec">
+                            <div class="list_spec" v-if="listing.bedroom !== null">
                                 <h5>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19.727" height="14" viewBox="0 0 19.727 14">
 										<path id="bed" d="M27.409,90.5h-.318V87.955a1.274,1.274,0,0,0-1.273-1.273V81.273A1.274,1.274,0,0,0,24.545,80H11.182a1.274,1.274,0,0,0-1.273,1.273v5.409a1.274,1.274,0,0,0-1.273,1.273V90.5H8.318A.318.318,0,0,0,8,90.818v1.273a.318.318,0,0,0,.318.318h.318v1.273A.318.318,0,0,0,8.955,94h.955a.318.318,0,0,0,.312-.256l.267-1.335H25.239l.267,1.335a.318.318,0,0,0,.312.256h.955a.318.318,0,0,0,.318-.318V92.409h.318a.318.318,0,0,0,.318-.318V90.818A.318.318,0,0,0,27.409,90.5ZM10.545,81.273a.637.637,0,0,1,.636-.636H24.545a.637.637,0,0,1,.636.636v5.409h-.636V85.409a1.274,1.274,0,0,0-1.273-1.273H19.455a1.274,1.274,0,0,0-1.273,1.273v1.273h-.636V85.409a1.274,1.274,0,0,0-1.273-1.273H12.455a1.274,1.274,0,0,0-1.273,1.273v1.273h-.636Zm13.364,4.136v1.273H18.818V85.409a.637.637,0,0,1,.636-.636h3.818a.637.637,0,0,1,.636.636Zm-7,0v1.273H11.818V85.409a.637.637,0,0,1,.636-.636h3.818A.637.637,0,0,1,16.909,85.409ZM9.273,87.955a.637.637,0,0,1,.636-.636H25.818a.637.637,0,0,1,.636.636V90.5H9.273Zm.375,5.409H9.273v-.955h.566Zm16.806,0h-.375l-.191-.955h.566Zm.636-1.591H8.636v-.636H27.091Z" transform="translate(-8 -80)" fill="#234836"/>
@@ -79,7 +74,7 @@
                                 </h5>
                                 <p>Bedrooms</p>
                             </div>
-                            <div class="list_spec">
+                            <div class="list_spec" v-if="listing.bathroom !== null">
                                 <h5>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
 										<g id="bathtub" transform="translate(-0.003)">
@@ -158,75 +153,75 @@
                                         <div class="desc_title">
                                             <h6>Property Detail</h6>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.location !== null">
                                             <p class="p_title">Location</p>
                                             <p class="p_text">{{listing.location}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.view !== null">
                                             <p class="p_title">View</p>
                                             <p class="p_text">{{listing.view}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.floor !== null">
                                             <p class="p_title">Floor</p>
                                             <p class="p_text">{{listing.floor}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.bedroom !== null">
                                             <p class="p_title">Bedrooms</p>
                                             <p class="p_text">{{listing.bedroom}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.bathroom !== null">
                                             <p class="p_title">Bathrooms</p>
                                             <p class="p_text">{{listing.bathroom}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.kitchen !== null">
                                             <p class="p_title">Kitchen</p>
                                             <p class="p_text">{{listing.kitchen}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.dining_room !== null">
                                             <p class="p_title">Dining Room</p>
                                             <p class="p_text">{{listing.dining_room}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.living_room !== null">
                                             <p class="p_title">Living Room</p>
                                             <p class="p_text">{{listing.living_room}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.pool !== null">
                                             <p class="p_title">Pool</p>
                                             <p class="p_text">{{listing.pool}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.aircon !== null">
                                             <p class="p_title">Air Con</p>
                                             <p class="p_text">{{listing.aircon}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.internet !== null">
                                             <p class="p_title">Internet</p>
                                             <p class="p_text">{{listing.internet}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.road_access !== null">
                                             <p class="p_title">Road Access</p>
                                             <p class="p_text">{{listing.road_access}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.parking !== null">
                                             <p class="p_title">Car Parking</p>
                                             <p class="p_text">{{listing.parking}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.electricity !== null">
                                             <p class="p_title">Electricity</p>
                                             <p class="p_text">{{listing.electricity}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.water_resource !== null">
                                             <p class="p_title">Water Resources</p>
                                             <p class="p_text">{{listing.water_resource}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.garden !== null">
                                             <p class="p_title">Garden</p>
                                             <p class="p_text">{{listing.garden}}</p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.land_size !== null">
                                             <p class="p_title">Land Size</p>
                                             <p class="p_text">{{listing.land_size}} m<sup>2</sup></p>
                                         </div>
-                                        <div class="p_detail">
+                                        <div class="p_detail" v-if="listing.distance !== null">
                                             <p class="p_title">Distance To Ubud Center</p>
                                             <p class="p_text">{{listing.distance}}</p>
                                         </div>
@@ -270,7 +265,7 @@ export default {
     name: 'Detail',
 	components: {
 		Navbarw,
-		Footer
+		Footer,
 	},
     setup(){
         const listing = ref([])

@@ -42,8 +42,8 @@
 				</div>
 				<div class="navbar-nav">
 					<router-link class="nav-link" to="/">About Us</router-link>
-					<router-link class="nav-link" to="/buy">Buy</router-link>
-					<router-link class="nav-link" to="/rent">Rent</router-link>
+					<router-link class="nav-link" to="/buy">For Sale</router-link>
+					<router-link class="nav-link" to="/rent">For Rent</router-link>
 					<router-link class="nav-link" to="/contact">Contact Us</router-link>
 				</div>
 			</div>

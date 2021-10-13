@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 // import 'bootstrap/dist/js/bootstrap.bundle'
 
+// import VueCarousel from 'vue-carousel'
+
 import axios from 'axios'
 
 import './assets/css/style.css'
