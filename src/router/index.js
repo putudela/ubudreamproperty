@@ -28,7 +28,7 @@ const routes = [
     component: Rent
   },
   {
-    path: '/rent/detail',
+    path: '/rent/detail/:id',
     name: 'rent-detail',
     component: RentDetail
   },

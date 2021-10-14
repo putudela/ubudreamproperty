@@ -12,26 +12,49 @@
                     <div class="col-lg-12 mx-auto">
                         <div class="title">
                             <h3 class="title-list">
-                                {{listing.title}}
+                                {{listings.title}}
                             </h3>
-                            <h3 class="title-list">
-                                Rp. {{formatPrice(listing.price)}}
-                            </h3>
+                            <div class="title-list">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="monthly-tab" data-bs-toggle="tab" data-bs-target="#monthly" type="button" role="tab" aria-controls="monthly" aria-selected="true">
+                                            Monthly Price
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="yearly-tab" data-bs-toggle="tab" data-bs-target="#yearly" type="button" role="tab" aria-controls="yearly" aria-selected="false">
+                                            Yearly Price
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="monthly" role="tabpanel" aria-labelledby="monthly-tab">
+                                        <h3>
+                                            Rp. {{formatPrice(listings.price_monthly)}}
+                                        </h3>
+                                    </div>
+                                    <div class="tab-pane fade" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
+                                        <h3>
+                                            Rp. {{formatPrice(listings.price_yearly)}}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <p class="loc">
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="10.667" viewBox="0 0 8 10.667">
 								<path id="Icon_awesome-map-marker-alt" data-name="Icon awesome-map-marker-alt" d="M3.589,10.451C.562,6.063,0,5.613,0,4A4,4,0,0,1,8,4c0,1.613-.562,2.063-3.589,6.451a.5.5,0,0,1-.822,0ZM4,5.667A1.667,1.667,0,1,0,2.333,4,1.667,1.667,0,0,0,4,5.667Z" fill="#7a7a7a"/>
 							</svg>
-                            {{listing.location}}
+                            {{listings.location}}
                         </p>
 
                         <div class="status">
-                            <div class="item" v-if="listing.listing_status == 'Freehold'">
-                                {{listing.listing_status}} / Hak Milik
+                            <div class="item" v-if="listings.listing_status == 'Freehold'">
+                                {{listings.listing_status}} / Hak Milik
                             </div>
                             <div class="item" v-else>
-                                {{listing.listing_status}} / Hak Sewa
+                                {{listings.listing_status}} / Hak Sewa
                             </div>
                         </div>
                         
@@ -62,24 +85,24 @@
 
                         <div class="spec">
                             <div class="list_spec">
-                                <h5>{{listing.code}}</h5>
+                                <h5>{{listings.code}}</h5>
                                 <p>Code</p>
                             </div>
                             <div class="list_spec">
-                                <h5 v-if="listing.listing_status == 'Freehold'">{{listing.listing_status}} / Hak Milik</h5>
-                                <h5 v-else>{{listing.listing_status}} / Hak Sewa</h5>
+                                <h5 v-if="listings.listing_status == 'Freehold'">{{listings.listing_status}} / Hak Milik</h5>
+                                <h5 v-else>{{listings.listing_status}} / Hak Sewa</h5>
                                 <p>Status</p>
                             </div>
-                            <div class="list_spec" v-if="listing.bedroom !== null">
+                            <div class="list_spec" v-if="listings.bedroom !== null">
                                 <h5>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19.727" height="14" viewBox="0 0 19.727 14">
 										<path id="bed" d="M27.409,90.5h-.318V87.955a1.274,1.274,0,0,0-1.273-1.273V81.273A1.274,1.274,0,0,0,24.545,80H11.182a1.274,1.274,0,0,0-1.273,1.273v5.409a1.274,1.274,0,0,0-1.273,1.273V90.5H8.318A.318.318,0,0,0,8,90.818v1.273a.318.318,0,0,0,.318.318h.318v1.273A.318.318,0,0,0,8.955,94h.955a.318.318,0,0,0,.312-.256l.267-1.335H25.239l.267,1.335a.318.318,0,0,0,.312.256h.955a.318.318,0,0,0,.318-.318V92.409h.318a.318.318,0,0,0,.318-.318V90.818A.318.318,0,0,0,27.409,90.5ZM10.545,81.273a.637.637,0,0,1,.636-.636H24.545a.637.637,0,0,1,.636.636v5.409h-.636V85.409a1.274,1.274,0,0,0-1.273-1.273H19.455a1.274,1.274,0,0,0-1.273,1.273v1.273h-.636V85.409a1.274,1.274,0,0,0-1.273-1.273H12.455a1.274,1.274,0,0,0-1.273,1.273v1.273h-.636Zm13.364,4.136v1.273H18.818V85.409a.637.637,0,0,1,.636-.636h3.818a.637.637,0,0,1,.636.636Zm-7,0v1.273H11.818V85.409a.637.637,0,0,1,.636-.636h3.818A.637.637,0,0,1,16.909,85.409ZM9.273,87.955a.637.637,0,0,1,.636-.636H25.818a.637.637,0,0,1,.636.636V90.5H9.273Zm.375,5.409H9.273v-.955h.566Zm16.806,0h-.375l-.191-.955h.566Zm.636-1.591H8.636v-.636H27.091Z" transform="translate(-8 -80)" fill="#234836"/>
 									</svg>
-                                    {{listing.bedroom}}
+                                    {{listings.bedroom}}
                                 </h5>
                                 <p>Bedrooms</p>
                             </div>
-                            <div class="list_spec" v-if="listing.bathroom !== null">
+                            <div class="list_spec" v-if="listings.bathroom !== null">
                                 <h5>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
 										<g id="bathtub" transform="translate(-0.003)">
@@ -125,7 +148,7 @@
 											</g>
 										</g>
 									</svg>
-                                    {{listing.bathroom}}
+                                    {{listings.bathroom}}
                                 </h5>
                                 <p>Bathrooms</p>
                             </div>
@@ -136,7 +159,7 @@
 											<path id="Path_107" data-name="Path 107" d="M13.767,0H.233A.233.233,0,0,0,0,.233V13.767A.233.233,0,0,0,.233,14H13.767A.233.233,0,0,0,14,13.767V.233A.233.233,0,0,0,13.767,0ZM.467.467h3.5c0,.7,0,2.768,0,2.8a3.286,3.286,0,0,1-3.5,3.492ZM4.412,3.733H8.633V8.4h-5.6v-2A3.637,3.637,0,0,0,4.412,3.733ZM7,12.833v.7H.467V7.225a4.725,4.725,0,0,0,2.1-.53V8.633a.233.233,0,0,0,.233.233H4.2v1.867a.233.233,0,0,0,.233.233H7.7V12.6H7.233A.233.233,0,0,0,7,12.833Zm6.533.7H7.467v-.467H11.03c.2,0,.4,0,.4-.233v-2.1a2.019,2.019,0,0,1,2.1-2.092Zm0-5.358a2.481,2.481,0,0,0-2.567,2.558V12.6h-2.8V10.733a.234.234,0,0,0-.069-.165.259.259,0,0,0-.166-.068H4.667V8.867h4.2A.233.233,0,0,0,9.1,8.633v-4.9h4.433Zm0-4.909H4.411c.022-.2.022-.617.022-1.517V.467h9.1Z" fill="#234836"/>
 										</g>
 									</svg>
-                                    {{listing.land_size}}
+                                    {{listings.land_size}}
                                 </h5>
                                 <p>m<sup>2</sup></p>
                             </div>
@@ -151,84 +174,84 @@
                                         <h6>Descriptions</h6>
                                     </div>
                                     <div class="description">
-                                        <p class="desc" v-html="listing.description"></p>
+                                        <p class="desc" v-html="listings.description"></p>
                                     </div>
 
                                     <div class="description">
                                         <div class="desc_title">
                                             <h6>Property Detail</h6>
                                         </div>
-                                        <div class="p_detail" v-if="listing.location !== null">
+                                        <div class="p_detail" v-if="listings.location !== null">
                                             <p class="p_title">Location</p>
-                                            <p class="p_text">{{listing.location}}</p>
+                                            <p class="p_text">{{listings.location}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.view !== null">
+                                        <div class="p_detail" v-if="listings.view !== null">
                                             <p class="p_title">View</p>
-                                            <p class="p_text">{{listing.view}}</p>
+                                            <p class="p_text">{{listings.view}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.floor !== null">
+                                        <div class="p_detail" v-if="listings.floor !== null">
                                             <p class="p_title">Floor</p>
-                                            <p class="p_text">{{listing.floor}}</p>
+                                            <p class="p_text">{{listings.floor}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.bedroom !== null">
+                                        <div class="p_detail" v-if="listings.bedroom !== null">
                                             <p class="p_title">Bedrooms</p>
-                                            <p class="p_text">{{listing.bedroom}}</p>
+                                            <p class="p_text">{{listings.bedroom}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.bathroom !== null">
+                                        <div class="p_detail" v-if="listings.bathroom !== null">
                                             <p class="p_title">Bathrooms</p>
-                                            <p class="p_text">{{listing.bathroom}}</p>
+                                            <p class="p_text">{{listings.bathroom}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.kitchen !== null">
+                                        <div class="p_detail" v-if="listings.kitchen !== null">
                                             <p class="p_title">Kitchen</p>
-                                            <p class="p_text">{{listing.kitchen}}</p>
+                                            <p class="p_text">{{listings.kitchen}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.dining_room !== null">
+                                        <div class="p_detail" v-if="listings.dining_room !== null">
                                             <p class="p_title">Dining Room</p>
-                                            <p class="p_text">{{listing.dining_room}}</p>
+                                            <p class="p_text">{{listings.dining_room}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.living_room !== null">
+                                        <div class="p_detail" v-if="listings.living_room !== null">
                                             <p class="p_title">Living Room</p>
-                                            <p class="p_text">{{listing.living_room}}</p>
+                                            <p class="p_text">{{listings.living_room}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.pool !== null">
+                                        <div class="p_detail" v-if="listings.pool !== null">
                                             <p class="p_title">Pool</p>
-                                            <p class="p_text">{{listing.pool}}</p>
+                                            <p class="p_text">{{listings.pool}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.aircon !== null">
+                                        <div class="p_detail" v-if="listings.aircon !== null">
                                             <p class="p_title">Air Con</p>
-                                            <p class="p_text">{{listing.aircon}}</p>
+                                            <p class="p_text">{{listings.aircon}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.internet !== null">
+                                        <div class="p_detail" v-if="listings.internet !== null">
                                             <p class="p_title">Internet</p>
-                                            <p class="p_text">{{listing.internet}}</p>
+                                            <p class="p_text">{{listings.internet}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.road_access !== null">
+                                        <div class="p_detail" v-if="listings.road_access !== null">
                                             <p class="p_title">Road Access</p>
-                                            <p class="p_text">{{listing.road_access}}</p>
+                                            <p class="p_text">{{listings.road_access}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.parking !== null">
+                                        <div class="p_detail" v-if="listings.parking !== null">
                                             <p class="p_title">Car Parking</p>
-                                            <p class="p_text">{{listing.parking}}</p>
+                                            <p class="p_text">{{listings.parking}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.electricity !== null">
+                                        <div class="p_detail" v-if="listings.electricity !== null">
                                             <p class="p_title">Electricity</p>
-                                            <p class="p_text">{{listing.electricity}}</p>
+                                            <p class="p_text">{{listings.electricity}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.water_resource !== null">
+                                        <div class="p_detail" v-if="listings.water_resource !== null">
                                             <p class="p_title">Water Resources</p>
-                                            <p class="p_text">{{listing.water_resource}}</p>
+                                            <p class="p_text">{{listings.water_resource}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.garden !== null">
+                                        <div class="p_detail" v-if="listings.garden !== null">
                                             <p class="p_title">Garden</p>
-                                            <p class="p_text">{{listing.garden}}</p>
+                                            <p class="p_text">{{listings.garden}}</p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.land_size !== null">
+                                        <div class="p_detail" v-if="listings.land_size !== null">
                                             <p class="p_title">Land Size</p>
-                                            <p class="p_text">{{listing.land_size}} m<sup>2</sup></p>
+                                            <p class="p_text">{{listings.land_size}} m<sup>2</sup></p>
                                         </div>
-                                        <div class="p_detail" v-if="listing.distance !== null">
+                                        <div class="p_detail" v-if="listings.distance !== null">
                                             <p class="p_title">Distance To Ubud Center</p>
-                                            <p class="p_text">{{listing.distance}}</p>
+                                            <p class="p_text">{{listings.distance}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -267,21 +290,21 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default {
-    name: 'Detail',
+    name: 'RentDetail',
 	components: {
 		Navbarw,
 		Footer
 	},
     setup(){
-        const listing = ref([])
+        const listings = ref([])
         const listingImage = ref([])
         const route = useRoute()
 
         onMounted(() => {
             axios.get(`getListing/${route.params.id}`)
             .then(result => {
-                console.log('Detail Listing:', result.data.listing)
-                listing.value = result.data.listing
+                console.log('Detail Listing:', result.data.listing.price_monthly)
+                listings.value = result.data.listing
                 listingImage.value = JSON.parse(result.data.listing.images)
                 console.log('Listings Images: ', listingImage.value)
             }).catch((err) => {
@@ -295,7 +318,7 @@ export default {
         }
 
         return {
-            listing,
+            listings,
             route,
             formatPrice,
             listingImage
@@ -305,4 +328,51 @@ export default {
 </script>
 
 <style>
+    .content-detail .title .title-list .nav{
+        justify-content: flex-end;
+    }
+    .content-detail .title .title-list .nav-tabs{
+        border: none;
+        padding: 0;
+        margin: -30px 0 0;
+    }
+    .content-detail .title .title-list .nav-tabs .nav-item{
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    .content-detail .title .title-list .nav-tabs .nav-link{
+        color: var(--primaryColor);
+        font-size: 9pt;
+        font-weight: 500;
+        border-radius: 0;
+        border: none;
+    }
+    .content-detail .title .title-list .nav-tabs .nav-link:hover{
+        color: white;
+        background: var(--primaryColor);
+        border: none !important;
+    }
+    .content-detail .title .title-list .nav-tabs .nav-link.active{
+        color: white;
+        background: var(--primaryColor);
+        border: none !important;
+    }
+    .content-detail .title .title-list .tab-content{
+        padding-top: 10px;
+    }
+    .content-detail .title .title-list .tab-content .tab-pane{
+        text-align: right;
+    }
+    @media(max-width: 768px){
+        .content-detail .title{
+            flex-wrap: wrap;
+        }
+        .content-detail .title .title-list .nav{
+            justify-content: flex-start;
+        }
+        .content-detail .title .title-list .tab-content .tab-pane{
+            text-align: left;
+        }
+    }
 </style>

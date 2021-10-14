@@ -36,7 +36,25 @@
                         </div>
                         
                         <div class="card">
-                            <!-- <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
+                            <!-- <swiper class="slider" style="width: 100%;" :navigation="{ nextEl: '.b-next', prevEl: '.b-prev', }" :pagination="{ el: '.swiper-pagination', dynamicBullets: true, clickable: true }">
+								<swiper-slide v-for="(image, index) in listingImage" :key="index" style="width: 100%;">
+									<figure class="text-center">
+										<img :src="imageUrl+image" style="width: 100%;">
+									</figure>
+								</swiper-slide>
+								<div class="swiper-nav-next b-next">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+									</svg>
+								</div>
+								<div class="swiper-nav-prev b-prev">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+									</svg>
+								</div>
+								<div class="swiper-pagination"></div>
+							</swiper> -->
+                            <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item" v-for="(image, index) in listingImage" :key="index" :class="{'active': index == 0}">
                                         <img :src="imageUrl+image" class="d-block w-100">
@@ -50,7 +68,7 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
-                            </div> -->
+                            </div>
                         </div>
 
                         <hr>
@@ -261,11 +279,19 @@ import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+// import SwiperCore, { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper'
+// import { Swiper, SwiperSlide } from 'swiper/vue'
+// import 'swiper/swiper-bundle.css'
+
+// SwiperCore.use([Navigation, Autoplay, Pagination, Scrollbar, A11y])
+
 export default {
     name: 'Detail',
 	components: {
 		Navbarw,
 		Footer,
+        // Swiper,
+        // SwiperSlide
 	},
     setup(){
         const listing = ref([])
@@ -327,7 +353,7 @@ export default {
     }
     .content-detail .card .carousel .carousel-item{
         width: 100%;
-        height: 400px;
+        height: 600px;
     }
     .content-detail .card .carousel .carousel-item img{
 		width: 100%;
@@ -382,6 +408,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: nowrap;
     }
     .content-detail .title-list{
         color: var(--primaryColor);
@@ -533,5 +560,15 @@ export default {
     }
     .content-detail .content_info .contact-btn .btn__secondary svg{
         margin-right: 5px;
+    }
+
+    @media(max-width: 768px){
+        .content-detail .title{
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .content-detail .title .title-list{
+            text-align: left;
+        }
     }
 </style>

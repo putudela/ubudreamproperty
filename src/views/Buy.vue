@@ -32,9 +32,27 @@
 											<!-- <img :src="imageUrl+listingImage" class="list-img"> -->
 											<splide :options="options">
 												<splide-slide v-for="(image, index) in formatImage(listing.images)" :key="index">
-													<img :src="imageUrl+image" class="d-block w-100">
+													<img :src="imageUrl+image" style="width: 100%;">
 												</splide-slide>
 											</splide>
+											<!-- <swiper class="slider" style="width: 100%;" :breakpoints="{ 640:{slidesPerView: 1}, 769:{slidesPerView: 1}, 1366:{slidesPerView: 1} }" :navigation="{ nextEl: '.b-next', prevEl: '.b-prev', }" :pagination="{ el: '.swiper-pagination', dynamicBullets: true, clickable: true }">
+												<swiper-slide v-for="(image, index) in formatImage(listing.images)" :key="index" style="width: 100%;">
+													<figure class="text-center" style="width: 100%;">
+														<img :src="imageUrl+image" style="width: 100%;">
+													</figure>
+												</swiper-slide>
+												<div class="swiper-nav-next b-next">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+														<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+													</svg>
+												</div>
+												<div class="swiper-nav-prev b-prev">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+														<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+													</svg>
+												</div>
+												<div class="swiper-pagination"></div>
+											</swiper> -->
 											<!-- <div :id="listing.id" class="carousel slide" data-bs-ride="carousel">
 												<div class="carousel-inner">
 													<div class="carousel-item" v-for="(image, index) in formatImage(listing.images)" :key="index" :class="{'active': index == 0}">
@@ -55,7 +73,7 @@
 										<div class="card-body">
 											<router-link :to="'/buy/detail/'+listing.id">
 												<h6 class="card-title">{{listing.title.substring(0,35)+'...'}}</h6>
-												<!-- <p class="text_info">Leasehold 20 Years</p> -->
+												<p class="text_info">{{listing.leasehold_ket}}</p>
 												<!-- <figure v-for="item in listingImage" :key="item.id">
 													<img :src="imageUrl+item" alt="">
 												</figure> -->
@@ -164,6 +182,12 @@ import $ from 'jquery'
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
+// import SwiperCore, { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper'
+// import { Swiper, SwiperSlide } from 'swiper/vue'
+// import 'swiper/swiper-bundle.css'
+
+// SwiperCore.use([Navigation, Autoplay, Pagination, Scrollbar, A11y])
+
 export default {
 	name: 'Buy',
 	components: {
@@ -171,14 +195,16 @@ export default {
 		Footer,
 		Splide,
 		SplideSlide,
+		// Swiper,
+		// SwiperSlide,
 	},
 	data() {
 		return {
 			options: {
 				rewind : true,
-				perPage: 1,
+				// perPage: 1,
 				width: 350,
-				autoplay: false,
+				// autoplay: false,
 				pagination: false,
 				// type: 'loop',
 				// gap    : '1rem',
@@ -257,9 +283,21 @@ export default {
 </script>
 
 <style>
+	.Buy .splide__slide{
+		width: 7%;
+	}
+	.Buy .splide__slide.is-active{
+		width: 350px !important;
+	}
+	.Buy #splide01-slide01{
+		width: 350px !important;
+	}
 	.Buy{
 		margin-top: 130px;
 	}
+	/* .Buy .slider{
+		height: 100%;
+	} */
 
 	.Buy .tagline{
 		padding: 50px;

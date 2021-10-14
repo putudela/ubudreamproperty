@@ -50,10 +50,11 @@
 													<span class="visually-hidden">Next</span>
 												</button>
 											</div> -->
-											<h6 class="price">Rp. {{formatPrice(listing.price)}}</h6>
+											<h6 class="price">Rp. {{formatPrice(listing.price_monthly)}}/Month <br> Rp. {{formatPrice(listing.price_yearly)}}/Year</h6>
+											<!-- <h6 class="price">Rp. {{formatPrice(listing.price_yearly)}}/Year</h6> -->
 										</figure>
 										<div class="card-body">
-											<router-link :to="'/buy/detail/'+listing.id">
+											<router-link :to="'/rent/detail/'+listing.id">
 												<h6 class="card-title">{{listing.title.substring(0,35)+'...'}}</h6>
 												<!-- <p class="text_info">Leasehold 20 Years</p> -->
 												<!-- <figure v-for="item in listingImage" :key="item.id">
