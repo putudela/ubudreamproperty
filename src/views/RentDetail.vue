@@ -3,8 +3,8 @@
     <div class="detail">
         <div class="container">
             <div class="tagline text-center">
-				<h5 class="title">Your Dream Property in Ubud</h5>
-				<h1 class="tag-title">Invest and Relax in Paredise</h1>
+				<!-- <h5 class="title">Your Dream Property in Ubud</h5>
+				<h1 class="tag-title">Invest and Relax in Paredise</h1> -->
 			</div>
 
             <div class="content-detail">
@@ -59,33 +59,23 @@
                         </div>
                         
                         <div class="card">
-                            <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
-                                <!-- <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselDetail" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                </div> -->
-                                <div class="carousel-inner">
-                                    <div class="carousel-item" v-for="(image, index) in listingImage" :key="index" :class="{'active': index == 0}">
-                                        <img :src="imageUrl+image" class="d-block w-100">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDetail" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselDetail" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
+                            <swiper :style="{'--swiper-navigation-color': '#fff','--swiper-pagination-color': '#fff'}" :loop="false" :spaceBetween="20" :navigation="true" :thumbs="{ swiper: thumbsSwiper }" class="mySwiper2">
+                                <swiper-slide v-for="(image, index) in listingImage" :key="index">
+                                    <img :src="imageUrl+image" />
+                                </swiper-slide>
+                            </swiper>
+                            <swiper @swiper="setThumbsSwiper" :loop="false" :spaceBetween="20" :slidesPerView="5" :watchSlidesProgress="true" class="mySwiper">
+                                <swiper-slide v-for="(image, index) in listingImage" :key="index">
+                                    <img :src="imageUrl+image" />
+                                </swiper-slide>
+                            </swiper>
                         </div>
 
                         <hr>
 
                         <div class="spec">
                             <div class="list_spec">
-                                <h5>{{listings.code}}</h5>
+                                <h5 class="code">{{listings.code}}</h5>
                                 <p>Code</p>
                             </div>
                             <div class="list_spec">
@@ -289,18 +279,53 @@ import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+// import 'swiper/css';
+import 'swiper/swiper-bundle.min.css'
+
+// import "swiper/css/free-mode"
+// import "swiper/css/navigation"
+// import "swiper/css/thumbs"
+
+// import './style.css';
+
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation,Thumbs, A11y
+} from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Navigation,Thumbs, A11y]);
+
 export default {
     name: 'RentDetail',
 	components: {
 		Navbarw,
-		Footer
+		Footer,
+        Swiper,
+        SwiperSlide,
 	},
+    data() {
+        return {
+            thumbsSwiper: null
+        };
+    },
+    methods: {
+        setThumbsSwiper(swiper) {
+            this.thumbsSwiper = swiper;
+        },
+    },
     setup(){
         const listings = ref([])
         const listingImage = ref([])
         const route = useRoute()
 
         onMounted(() => {
+            window.scrollTo(0,0)
+            
             axios.get(`getListing/${route.params.id}`)
             .then(result => {
                 console.log('Detail Listing:', result.data.listing.price_monthly)

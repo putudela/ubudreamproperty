@@ -3,12 +3,12 @@
 	<div class="Buy">
 		<div class="container">
 			<div class="tagline text-center">
-				<h5 class="title">Your Dream Property in Ubud</h5>
-				<h1 class="tag-title">Invest and Relax in Paredise</h1>
+				<!-- <h5 class="title">Your Dream Property in Ubud</h5>
+				<h1 class="tag-title">Invest and Relax in Paredise</h1> -->
 			</div>
 
 			<div class="listing">
-				<h3 class="title">For Rent</h3>
+				<h3 class="title">Property To Rent in Ubud</h3>
 
 				<table id="listing" class="t-listing">
 					<thead>
@@ -28,28 +28,23 @@
 											<h6 v-else>{{listing.listing_status}} / Hak Sewa</h6>
 										</div>
 										<figure>
-											<div class="bg"></div>
+											<!-- <div class="bg"></div> -->
+											<carousel :items-to-show="1">
+													<slide v-for="(image, index) in formatImage(listing.images)" :key="index">
+														<img :src="imageUrl+image" class="w-100">
+													</slide>
+												<template #addons>
+													<Navigation/>
+													<Pagination/>
+												</template>
+
+											</carousel>
 											<!-- <img :src="imageUrl+listingImage" class="list-img"> -->
-											<splide :options="options">
+											<!-- <splide :options="options">
 												<splide-slide v-for="(image, index) in formatImage(listing.images)" :key="index">
 													<img :src="imageUrl+image" class="d-block w-100">
 												</splide-slide>
-											</splide>
-											<!-- <div :id="listing.id" class="carousel slide" data-bs-ride="carousel">
-												<div class="carousel-inner">
-													<div class="carousel-item" v-for="(image, index) in formatImage(listing.images)" :key="index" :class="{'active': index == 0}">
-														<img :src="imageUrl+image" class="d-block w-100">
-													</div>
-												</div>
-												<button class="carousel-control-prev" type="button" :data-bs-target="'#'+listing.id" data-bs-slide="prev">
-													<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-													<span class="visually-hidden">Previous</span>
-												</button>
-												<button class="carousel-control-next" type="button" :data-bs-target="'#'+listing.id" data-bs-slide="next">
-													<span class="carousel-control-next-icon" aria-hidden="true"></span>
-													<span class="visually-hidden">Next</span>
-												</button>
-											</div> -->
+											</splide> -->
 											<h6 class="price">Rp. {{formatPrice(listing.price_monthly)}}/Month <br> Rp. {{formatPrice(listing.price_yearly)}}/Year</h6>
 											<!-- <h6 class="price">Rp. {{formatPrice(listing.price_yearly)}}/Year</h6> -->
 										</figure>
@@ -162,30 +157,37 @@ import "datatables.net-bs5/js/dataTables.bootstrap5"
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css"
 import $ from 'jquery'
 
-import { Splide, SplideSlide } from '@splidejs/vue-splide';
-import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+// import { Splide, SplideSlide } from '@splidejs/vue-splide';
+// import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
 export default {
 	name: 'Buy',
 	components: {
 		Navbarw,
 		Footer,
-		Splide,
-		SplideSlide,
+		// Splide,
+		// SplideSlide,
+		Carousel,
+		Slide,
+		Navigation,
+		Pagination,
 	},
-	data() {
-		return {
-			options: {
-				rewind : true,
-				perPage: 1,
-				width: 350,
-				autoplay: false,
-				pagination: false,
-				// type: 'loop',
-				// gap    : '1rem',
-			},
-		};
-    },
+	// data() {
+	// 	return {
+	// 		options: {
+	// 			rewind : true,
+	// 			perPage: 1,
+	// 			width: 350,
+	// 			autoplay: false,
+	// 			pagination: false,
+	// 			// type: 'loop',
+	// 			// gap    : '1rem',
+	// 		},
+	// 	};
+    // },
 	setup(){
 		const listings = ref([])
 		// const swiper = ref([])
@@ -193,6 +195,8 @@ export default {
 		const router = useRouter()
 
 		onMounted(() => {
+			window.scrollTo(0,0)
+			
 			axios.get('getListing')
 			.then((result) => {
                 console.log('Listings: ',result.data)

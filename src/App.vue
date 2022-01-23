@@ -4,7 +4,19 @@
 	</div>
 	<router-view/>
 </template>
-
+<script>
+export default {
+	setup() {
+		function scrollToTop(){
+			window.scrollTo(0,0)
+		}
+		
+		return{
+			scrollToTop
+		}
+	},
+}
+</script>
 <style>
 #app {
 	font-family: 'Montserrat', sans-serif;

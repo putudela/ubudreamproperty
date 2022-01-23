@@ -9,13 +9,13 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="../assets/img/bg-header.jpg" class="d-block w-100" alt="...">
+					<img src="../assets/img/slide1.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="../assets/img/bg-header.jpg" class="d-block w-100" alt="...">
+					<img src="../assets/img/slide2.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="../assets/img/bg-header.jpg" class="d-block w-100" alt="...">
+					<img src="../assets/img/slide3.jpg" class="d-block w-100" alt="...">
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,17 +35,13 @@
 			<div class="container">
 				<div class="row row-about">
 					<div class="col-lg-6">
-						<h1 class="title">About Us</h1>
-						<p class="desc">
-							Tulola's Co-Founder and Creative Conceptor
-						</p>
-						<p class="desc">
-							Co-Founder and Creative Conceptor who weaves and curates the inspiration from Indonesia’s wide array of art; in the form of literary works, behaviors, and history, into Tulola's work. She also leads the marketing efforts and branding for the company.
+						<h1 class="title">{{about.judul}}</h1>
+						<p class="desc" v-html="about.deskripsi">
 						</p>
 					</div>
 					<div class="col-lg-6">
 						<figure>
-							<img src="../assets/img/about-img.jpg" class="about-img" alt="">
+							<img :src="imageAbout+about.image" class="about-img" alt="">
 						</figure>
 					</div>
 					
@@ -53,21 +49,21 @@
 			</div>
 		</div>
 
-		<div class="container">
+		<!-- <div class="container">
 			<hr>
-		</div>
+		</div> -->
 		
-		<div class="tagline text-center">
+		<!-- <div class="tagline text-center">
 			<h5 class="title">Your Dream Property in Ubud</h5>
 			<h1 class="tag-title">Invest and Relax in Paredise</h1>
-		</div>
+		</div> -->
 
 		<div class="banner">
 			<figure class="desktop">
-				<img src="../assets/img/banner.svg" class="banner_d" alt="">
+				<img src="../assets/img/banner_new.svg" class="banner_d" alt="">
 			</figure>
 			<figure class="mobile">
-				<img src="../assets/img/banner_m.svg" class="banner_m" alt="">
+				<img src="../assets/img/banner_m_new.svg" class="banner_m" alt="">
 			</figure>
 		</div>
 
@@ -78,7 +74,8 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
-// import { ref, onBeforeMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
 export default {
 	name: 'Home',
@@ -86,12 +83,38 @@ export default {
 		Navbar,
 		Footer
 	},
+	setup(){
+		const about = ref([])
+
+		onMounted(() => {
+			window.scrollTo(0,0)
+			
+			axios.get('getAbout')
+			.then((result) => {
+				console.log("About : ", result.data[0])
+				about.value = result.data[0]
+			}).catch((err) => {
+				console.log(err.response)
+			})
+		})
+
+		return{
+			about,
+		}
+	}
 }
 </script>
 
 <style scoped>
 	.home .carousel .carousel-inner .carousel-item{
 		height: 500px;
+		vertical-align: middle;
+	}
+	.home .carousel .carousel-inner .carousel-item img{
+		background-position-y: center;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
 	}
 	.home .img-header{
 		width: 100%;
@@ -104,7 +127,9 @@ export default {
 		object-fit: cover;
 		position: relative;
 		z-index: -1;
-		background-position-y: center;
+		background-position: center;
+		/* transform: translateY(-50%); */
+		/* background-size: cover; */
 	}
 
 	.home .about{
@@ -151,6 +176,9 @@ export default {
 	}
 	
 	@media (max-width: 767.98px){
+		.home .about{
+			margin: 10px 0 50px;
+		}
 		.home .banner figure .banner_m{
 			width: 100%;
 		}
@@ -163,5 +191,12 @@ export default {
 			height: 100%;
 			object-fit: cover;
 		}
+		.home .tagline{
+            padding: 20px;
+        }
+        .home .tagline .tag-title{
+            font-weight: 400;
+            font-size: 30pt;
+        }
 	}
 </style>

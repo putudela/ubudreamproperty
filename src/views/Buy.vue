@@ -3,12 +3,12 @@
 	<div class="Buy">
 		<div class="container">
 			<div class="tagline text-center">
-				<h5 class="title">Your Dream Property in Ubud</h5>
-				<h1 class="tag-title">Invest and Relax in Paredise</h1>
+				<!-- <h5 class="title">Your Dream Property in Ubud</h5>
+				<h1 class="tag-title">Invest and Relax in Paredise</h1> -->
 			</div>
 
 			<div class="listing">
-				<h3 class="title">For Sale</h3>
+				<h3 class="title">Property For Sale <br> Freehold and Leasehold in Ubud</h3>
 
 				<table id="listing" class="t-listing">
 					<thead>
@@ -28,13 +28,23 @@
 											<h6 v-else>{{listing.listing_status}} / Hak Sewa</h6>
 										</div>
 										<figure>
-											<div class="bg"></div>
+											<!-- <div class="bg"></div> -->
+											<carousel :items-to-show="1">
+													<slide v-for="(image, index) in formatImage(listing.images)" :key="index">
+														<img :src="imageUrl+image" class="w-100">
+													</slide>
+												<template #addons>
+													<Navigation/>
+													<Pagination/>
+												</template>
+
+											</carousel>
 											<!-- <img :src="imageUrl+listingImage" class="list-img"> -->
-											<splide :options="options">
+											<!-- <splide :options="options">
 												<splide-slide v-for="(image, index) in formatImage(listing.images)" :key="index">
 													<img :src="imageUrl+image" style="width: 100%;">
 												</splide-slide>
-											</splide>
+											</splide> -->
 											<!-- <swiper class="slider" style="width: 100%;" :breakpoints="{ 640:{slidesPerView: 1}, 769:{slidesPerView: 1}, 1366:{slidesPerView: 1} }" :navigation="{ nextEl: '.b-next', prevEl: '.b-prev', }" :pagination="{ el: '.swiper-pagination', dynamicBullets: true, clickable: true }">
 												<swiper-slide v-for="(image, index) in formatImage(listing.images)" :key="index" style="width: 100%;">
 													<figure class="text-center" style="width: 100%;">
@@ -53,21 +63,7 @@
 												</div>
 												<div class="swiper-pagination"></div>
 											</swiper> -->
-											<!-- <div :id="listing.id" class="carousel slide" data-bs-ride="carousel">
-												<div class="carousel-inner">
-													<div class="carousel-item" v-for="(image, index) in formatImage(listing.images)" :key="index" :class="{'active': index == 0}">
-														<img :src="imageUrl+image" class="d-block w-100">
-													</div>
-												</div>
-												<button class="carousel-control-prev" type="button" :data-bs-target="'#'+listing.id" data-bs-slide="prev">
-													<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-													<span class="visually-hidden">Previous</span>
-												</button>
-												<button class="carousel-control-next" type="button" :data-bs-target="'#'+listing.id" data-bs-slide="next">
-													<span class="carousel-control-next-icon" aria-hidden="true"></span>
-													<span class="visually-hidden">Next</span>
-												</button>
-											</div> -->
+											
 											<h6 class="price">Rp. {{formatPrice(listing.price)}}</h6>
 										</figure>
 										<div class="card-body">
@@ -179,8 +175,11 @@ import "datatables.net-bs5/js/dataTables.bootstrap5"
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css"
 import $ from 'jquery'
 
-import { Splide, SplideSlide } from '@splidejs/vue-splide';
-import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+// import { Splide, SplideSlide } from '@splidejs/vue-splide';
+// import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
 // import SwiperCore, { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper'
 // import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -193,31 +192,55 @@ export default {
 	components: {
 		Navbarw,
 		Footer,
-		Splide,
-		SplideSlide,
+		// Splide,
+		// SplideSlide,
+		Carousel,
+		Slide,
+		Navigation,
+		Pagination,
 		// Swiper,
 		// SwiperSlide,
 	},
-	data() {
-		return {
-			options: {
-				rewind : true,
-				// perPage: 1,
-				width: 350,
-				// autoplay: false,
-				pagination: false,
-				// type: 'loop',
-				// gap    : '1rem',
-			},
-		};
-    },
+	// data() {
+	// 	return {
+	// 		options: {
+	// 			rewind : true,
+	// 			// perPage: 1,
+	// 			width: 350,
+	// 			// autoplay: false,
+	// 			pagination: false,
+	// 			// type: 'loop',
+	// 			// gap    : '1rem',
+	// 		},
+	// 	};
+    // },
 	setup(){
 		const listings = ref([])
 		// const swiper = ref([])
 		const listingImage = ref([])
 		const router = useRouter()
 
+		const options = {
+			// type   : 'loop',
+			rewind : true,
+			perPage: 1,
+			perMove: 1,
+			autoplay: true,
+			focus  : 'center',
+			width: 350,
+			// breakpoints: {
+			// 	640: {
+			// 		width: 350,
+			// 	},
+			// 	480: {
+			// 		width: 350,
+			// 	},
+			// },
+		}
+
 		onMounted(() => {
+			window.scrollTo(0,0)
+
 			axios.get('getListing')
 			.then((result) => {
                 console.log('Listings: ',result.data)
@@ -275,7 +298,8 @@ export default {
 			formatImage,
 			onSwiper,
 			onSlideChange,
-			listingFilter
+			listingFilter,
+			options
 			// swiper
 		}
 	}
@@ -283,6 +307,20 @@ export default {
 </script>
 
 <style>
+	.Buy .carousel .carousel__viewport .carousel__track{
+		width: 100%;
+	}
+	.Buy .carousel .carousel__viewport .carousel__track .carousel__slide{
+		width: 100%;
+	}
+	.Buy .carousel .carousel__prev{
+		background: rgba(0, 0, 0, 0.5);
+		left: 20px;
+	}
+	.Buy .carousel .carousel__next{
+		background: rgba(0, 0, 0, 0.5);
+		right: 20px;
+	}
 	.Buy .splide__slide{
 		width: 7%;
 	}
@@ -300,7 +338,7 @@ export default {
 	} */
 
 	.Buy .tagline{
-		padding: 50px;
+		padding: 10px;
 	}
 	.Buy .tagline .title{
 		font-weight: 500;
@@ -358,20 +396,20 @@ export default {
 		border-radius: 5px;
 		color: white;
 		text-align: center;
-		width: 40%;
-		padding: 0;
+		/* width: 60%; */
+		padding: 0 4px 1px;
 		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 	}
 	.Buy .listing .card .category h6{
 		text-transform: uppercase;
 		margin: 3px 1px 2px;
 		font-weight: 400;
-		font-size: 6pt;
+		font-size: 10pt;
 	}
 	.Buy .listing .card figure{
 		border-radius: 0;
 		width: 100%;
-		height: 200px;
+		height: 190px;
 		margin-bottom: 0;
 		clip-path: inset(0 0 0 0);
 		position: relative;
@@ -393,10 +431,10 @@ export default {
 	} */
 	.Buy .listing .card figure .bg{
 		width: 100%;
-		height: 40%;
+		height: 35%;
 		position: absolute;
 		z-index: 2;
-		background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+		background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
 		bottom: 0;
 		left: 0;
 	}
@@ -407,6 +445,7 @@ export default {
 		bottom: 0;
 		left: 20px;
 		z-index: 3;
+		text-shadow: 0 0 10px #000000;
 	}
 	.Buy .listing .card figure .list-img:hover{
 		width: 100%;
@@ -426,7 +465,7 @@ export default {
 	}
 	.Buy .listing .card .card-body .text_info{
 		color: #7a7a7a;
-		font-size: 9pt;
+		font-size: 11pt;
 		font-weight: 700;
 		margin-bottom: 3px;
 		margin-top: 3px;
@@ -438,7 +477,7 @@ export default {
 	.Buy .listing .card .card-body .loc{
 		color: #7a7a7a;
 		text-transform: uppercase;
-		font-size: 6pt;
+		font-size: 10pt;
 		display: flex;
 		align-items: center;
 		margin-top: 10px;
@@ -473,5 +512,50 @@ export default {
 		/* padding: 0 15px; */
 		text-transform: uppercase;
 		font-size: 11pt;
+	}
+	@media (max-width: 767.98px)
+	{
+		.Buy .splide{
+			width: 100%;
+		}
+		.Buy .splide__slide{
+			width: 100%;
+		}
+		/* .Buy .splide__slide.is-active{
+			width: 100% !important;
+		} */
+
+		.Buy .tagline{
+            padding: 3px;
+        }
+        .Buy .tagline .tag-title{
+            font-weight: 400;
+            font-size: 30pt;
+        }
+		.Buy table.t-listing tbody tr{
+			width: 100%;
+			float: none;
+		}
+
+		/* ====== Table ====== */
+		.Buy .dataTables_wrapper{
+			position: relative;
+		}
+		.Buy .dataTables_wrapper .dataTables_length{
+			text-align: left;
+			margin: 10px 0;
+		}
+		.Buy .dataTables_wrapper .dataTables_filter{
+			text-align: left;
+			margin: 10px 0;
+		}
+		.Buy .dataTables_wrapper .dataTables_filter label{
+			width: 100%;
+			padding: 0 10px 0 0;
+		}
+		.Buy .dataTables_wrapper .dataTables_filter label input{
+			width: 82%;
+		}
+		/* ====== Table ====== */
 	}
 </style>

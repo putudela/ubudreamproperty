@@ -3,8 +3,8 @@
     <div class="detail">
         <div class="container">
             <div class="tagline text-center">
-				<h5 class="title">Your Dream Property in Ubud</h5>
-				<h1 class="tag-title">Invest and Relax in Paredise</h1>
+				<!-- <h5 class="title">Your Dream Property in Ubud</h5>
+				<h1 class="tag-title">Invest and Relax in Paredise</h1> -->
 			</div>
 
             <div class="content-detail">
@@ -36,6 +36,21 @@
                         </div>
                         
                         <div class="card">
+                            <swiper :style="{'--swiper-navigation-color': '#fff','--swiper-pagination-color': '#fff'}" :loop="false" :spaceBetween="20" :navigation="true" :thumbs="{ swiper: thumbsSwiper }" class="mySwiper2">
+                                <swiper-slide v-for="(image, index) in listingImage" :key="index">
+                                    <img :src="imageUrl+image" />
+                                </swiper-slide>
+                            </swiper>
+                            <swiper @swiper="setThumbsSwiper" :loop="false" :spaceBetween="20" :slidesPerView="5" :watchSlidesProgress="true" class="mySwiper">
+                                <swiper-slide v-for="(image, index) in listingImage" :key="index">
+                                    <img :src="imageUrl+image" />
+                                </swiper-slide>
+                            </swiper>
+                            <!-- <splide :options="options">
+								<splide-slide v-for="(image, index) in listingImage" :key="index">
+									<img :src="imageUrl+image" style="width: 100%;">
+								</splide-slide>
+							</splide> -->
                             <!-- <swiper class="slider" style="width: 100%;" :navigation="{ nextEl: '.b-next', prevEl: '.b-prev', }" :pagination="{ el: '.swiper-pagination', dynamicBullets: true, clickable: true }">
 								<swiper-slide v-for="(image, index) in listingImage" :key="index" style="width: 100%;">
 									<figure class="text-center">
@@ -54,28 +69,13 @@
 								</div>
 								<div class="swiper-pagination"></div>
 							</swiper> -->
-                            <div id="carouselDetail" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item" v-for="(image, index) in listingImage" :key="index" :class="{'active': index == 0}">
-                                        <img :src="imageUrl+image" class="d-block w-100">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDetail" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselDetail" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
                         </div>
 
                         <hr>
 
                         <div class="spec">
                             <div class="list_spec">
-                                <h5>{{listing.code}}</h5>
+                                <h5 class="code">{{listing.code}}</h5>
                                 <p>Code</p>
                             </div>
                             <div class="list_spec">
@@ -247,13 +247,13 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="contact-btn">
-                                        <a href="#" class="btn btn__primary">
+                                        <a href="https://wa.me/+6281237154472" target="_blank" class="btn btn__primary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
                                                 <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
                                             </svg>
                                             Contact Agent Via Whatsapp
                                         </a>
-                                        <a href="#" class="btn btn__secondary">
+                                        <a href="mailto:ubudreamproperty@gmail.com" target="_blank" class="btn btn__secondary">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                                                 <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
                                             </svg>
@@ -279,29 +279,84 @@ import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+// import { Splide, SplideSlide } from '@splidejs/vue-splide';
+// import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+
 // import SwiperCore, { Navigation, Autoplay, Pagination, Scrollbar, A11y } from 'swiper'
 // import { Swiper, SwiperSlide } from 'swiper/vue'
 // import 'swiper/swiper-bundle.css'
 
 // SwiperCore.use([Navigation, Autoplay, Pagination, Scrollbar, A11y])
 
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+// import 'swiper/css';
+import 'swiper/swiper-bundle.min.css'
+
+// import "swiper/css/free-mode"
+// import "swiper/css/navigation"
+// import "swiper/css/thumbs"
+
+// import './style.css';
+
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation,Thumbs, A11y
+} from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Navigation,Thumbs, A11y]);
+
 export default {
     name: 'Detail',
 	components: {
 		Navbarw,
 		Footer,
-        // Swiper,
-        // SwiperSlide
+        Swiper,
+        SwiperSlide,
+        // Splide,
+        // SplideSlide,
 	},
+    data() {
+        return {
+            thumbsSwiper: null
+        };
+    },
+    methods: {
+        setThumbsSwiper(swiper) {
+            this.thumbsSwiper = swiper;
+        },
+    },
     setup(){
         const listing = ref([])
         const listingImage = ref([])
         const route = useRoute()
 
+        const options = {
+			// type   : 'loop',
+			rewind : true,
+			perPage: 1,
+			perMove: 1,
+			autoplay: true,
+			focus  : 'center',
+			// breakpoints: {
+			// 	640: {
+			// 		width: 350,
+			// 	},
+			// 	480: {
+			// 		width: 350,
+			// 	},
+			// },
+		}
+
         onMounted(() => {
+            window.scrollTo(0,0)
+
             axios.get(`getListing/${route.params.id}`)
             .then(result => {
-                console.log('Detail Listing:', result.data.listing)
+                console.log('Detail Listing:', result.data.listing.price_monthly)
                 listing.value = result.data.listing
                 listingImage.value = JSON.parse(result.data.listing.images)
                 console.log('Listings Images: ', listingImage.value)
@@ -309,7 +364,7 @@ export default {
                 console.log(err.response)
             })
         })
-
+        
         function formatPrice(value){
             let val = (value/1)
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -319,7 +374,8 @@ export default {
             listing,
             route,
             formatPrice,
-            listingImage
+            listingImage,
+            options
         }
     }
 }
@@ -331,7 +387,7 @@ export default {
 	}
 
 	.detail .tagline{
-		padding: 50px;
+		padding: 10px;
 	}
 	.detail .tagline .title{
 		font-weight: 500;
@@ -348,9 +404,87 @@ export default {
         margin-bottom: 50px;
     }
     .content-detail .card{
+        width: 100%;
         border-radius: 0;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 0;
+        border: none;
+        /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
     }
+    .content-detail .card .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .content-detail .card .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .content-detail .card .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .content-detail .card .swiper {
+        width: 100%;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .content-detail .card .swiper-slide {
+        background-size: cover;
+        background-position: center;
+    }
+
+    .content-detail .card .mySwiper2 {
+        height: 80%;
+        width: 100%;
+    }
+
+    .content-detail .card .mySwiper {
+        width: 100%;
+        /* height: 20%; */
+        box-sizing: border-box;
+        padding: 10px 0;
+    }
+
+    .content-detail .card .mySwiper .swiper-slide {
+        width: 20%;
+        /* height: 100%; */
+        opacity: 1;
+    }
+
+    .content-detail .card .mySwiper .swiper-slide-thumb-active {
+        opacity: 1;
+        border: 2px solid var(--secondaryColor);
+    }
+
+    .content-detail .card .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
     .content-detail .card .carousel .carousel-item{
         width: 100%;
         height: 600px;
@@ -420,7 +554,7 @@ export default {
 
     .content-detail .loc{
         color: var(--semiGrey) !important;
-        font-size: 10pt;
+        font-size: 14pt;
         display: flex;
         align-items: center;
         font-weight: 500;
@@ -448,46 +582,53 @@ export default {
         display: flex;
         align-items: center;
         width: 100%;
+        background: var(--primaryColor);
         /* border-right: 1px solid var(--semiGrey); */
     }
     .content-detail .spec .list_spec{
         padding: 20px 30px 10px;
         text-align: center;
-        border-left: 1px solid var(--semiGrey);
+        /* border-left: 1px solid var(--semiGrey); */
         flex: auto;
     }
-    .content-detail .spec .list_spec.land{
-        border-right: 1px solid var(--semiGrey);
+    .content-detail .spec .list_spec h5.code{
+        text-transform: uppercase;
     }
+    /* .content-detail .spec .list_spec.land{
+        border-right: 1px solid var(--semiGrey);
+    } */
 
     .content-detail .spec .list_spec h5{
-        color: var(--darkGrey);
+        color: white;
         font-weight: 700;
     }
     .content-detail .spec .list_spec h5 svg{
         width: 30px;
         height: auto;
     }
+    .content-detail .spec .list_spec h5 svg path{
+        fill: white;
+    }
     .content-detail .spec .list_spec p{
-        color: var(--semiGrey);
+        color: rgba(255, 255, 255, 0.8);
         font-weight: 600;
     }
 
     .content-detail .content_info .description{
         /* padding: 20px 0; */
-        border-right: 1px solid var(--semiGrey);
+        /* border-right: none; */
         /* margin-top: 20px; */
     }
     .content-detail .content_info .desc_title{
-        border-bottom: 1px solid var(--semiGrey);
-        padding: 0 20px 5px;
+        /* border-bottom: 1px solid var(--semiGrey); */
+        padding: 20px 20px 5px;
         width: 94%;
     }
     .content-detail .content_info .desc_title h6{
         font-weight: 700;
     }
     .content-detail .content_info .description .desc_title{
-        border-bottom: 1px solid var(--semiGrey);
+        /* border-bottom: 1px solid var(--semiGrey); */
         padding: 0 20px 5px;
         margin-bottom: 15px;
         width: 94%;
@@ -563,12 +704,73 @@ export default {
     }
 
     @media(max-width: 768px){
+        .detail .tagline{
+            padding: 3px;
+        }
+        .detail .tagline .tag-title{
+            font-weight: 400;
+            font-size: 30pt;
+        }
         .content-detail .title{
             flex-wrap: wrap;
             width: 100%;
         }
         .content-detail .title .title-list{
             text-align: left;
+        }
+
+        .content-detail .spec{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+            /* border-right: 1px solid var(--semiGrey); */
+        }
+        .content-detail .spec .list_spec{
+            padding: 20px 10px 4px;
+            height: 80px;
+            text-align: center;
+            border-left: none;
+            flex: auto;
+        }
+        .content-detail .spec .list_spec h5.code{
+            text-transform: uppercase;
+            font-size: 9pt;
+        }
+        .content-detail .spec .list_spec.land{
+            border-right: none;
+        }
+
+        .content-detail .spec .list_spec h5{
+            color: white;
+            font-weight: 700;
+            font-size: 9pt;
+        }
+        .content-detail .spec .list_spec h5 svg{
+            width: 20px;
+            height: auto;
+        }
+        .content-detail .spec .list_spec p{
+            color: white;
+            font-weight: 600;
+            font-size: 7pt;
+        }
+
+        .content-detail .content_info .description{
+            /* padding: 20px 0; */
+            border-right: none;
+            /* margin-top: 20px; */
+        }
+        .content-detail .description .p_detail{
+            align-items: flex-start;
+        }
+        .content-detail .description .p_detail .p_title{
+            width: 50%;
+            margin-right: 10px;
+        }
+        .content-detail .description .p_detail .p_text{
+            width: 50%;
+            margin-right: 10px;
         }
     }
 </style>
